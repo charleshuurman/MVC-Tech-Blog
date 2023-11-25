@@ -16,30 +16,35 @@ module.exports = (sequelize, DataTypes) => {
       },
       imageUrl: {
         type: DataTypes.STRING,
-        allowNull: true, // Allowing null so the image is optional
+        allowNull: true,
         validate: {
-          isUrl: true, // Validates that the input is a URL
+          isUrl: true,
         }
       },
       url: {
         type: DataTypes.STRING,
-        allowNull: true, // Allowing null so the URL is optional
+        allowNull: true,
         validate: {
-          isUrl: true, // Validates that the input is a URL
+          isUrl: true,
         }
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
       }
     });
   
     Post.associate = function(models) {
-      // Associations
-      // A Post belongs to a User
       Post.belongsTo(models.User, {
         foreignKey: 'userId',
         as: 'author',
         onDelete: 'CASCADE',
       });
   
-      // A Post can have many Comments
       Post.hasMany(models.Comment, {
         foreignKey: 'postId',
         as: 'comments',

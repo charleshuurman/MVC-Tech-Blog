@@ -43,4 +43,4 @@ module.exports = (sequelize, DataTypes) => {
   
     return User;
   };
-  
+  // create mySQL: npx sequelize-cli model:generate --name User --attributes username:string,email:string,password:string
