@@ -1,6 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
     const Comment = sequelize.define('Comment', {
-      // attributes
       content: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -8,19 +7,33 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         }
       },
-
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      postId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      // Timestamps
+      createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      }
     });
   
     Comment.associate = function(models) {
-      // Associations can be defined here
-      // A Comment belongs to a User
+      // Associations
       Comment.belongsTo(models.User, {
         foreignKey: 'userId',
-        as: 'author',
+        as: 'user',
         onDelete: 'CASCADE',
       });
   
-      // A Comment belongs to a Post
       Comment.belongsTo(models.Post, {
         foreignKey: 'postId',
         as: 'post',
