@@ -1,0 +1,22 @@
+{{!-- views/dashboard.handlebars --}}
+{{> header }}
+
+<h1>Dashboard</h1>
+
+{{#if posts.length}}
+  <div>
+    {{#each posts}}
+      <div>
+        <h3>{{this.title}}</h3>
+        <p>{{this.content}}</p>
+        <!-- Add buttons or links for editing and deleting posts -->
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <p>You have no posts yet. Start by creating one!</p>
+{{/if}}
+
+<a href="/posts/new">Create New Post</a>
+
+{{> footer }}
