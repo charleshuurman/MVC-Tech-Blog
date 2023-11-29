@@ -9,7 +9,20 @@
       <div>
         <h3>{{this.title}}</h3>
         <p>{{this.content}}</p>
-        <!-- Add buttons or links for editing and deleting posts -->
+        <!-- Display image if imageUrl is present -->
+
+        {{#if this.imageUrl}}
+          <img src="{{this.imageUrl}}" alt="Post Image">
+        {{/if}}
+        {{#if this.url}}
+          <a href="{{this.url}}">Link to More Info</a>
+        {{/if}}
+
+        <!-- Buttons or links for editing and deleting posts -->
+        <a href="/posts/edit/{{this.id}}">Edit</a> |
+        <form action="/posts/delete/{{this.id}}" method="POST" style="display: inline;">
+          <button type="submit">Delete</button>
+        </form>
       </div>
     {{/each}}
   </div>

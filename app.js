@@ -6,11 +6,16 @@ const { sequelize } = require('./models');
 const homeRoutes = require('./routes/homeRoutes');
 const authRoutes = require('./routes/authRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
+const blogpostRoutes = require('./routes/blogpostRoutes'); 
+//const methodOverride = require('method-override');
+
 
 const app = express();
 
 // Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true })); // Parse request body
+
+// app.use(methodOverride('_method'));
 
 // Configure session middleware
 app.use(session({
@@ -36,10 +41,10 @@ app.set('view engine', 'handlebars');
 
 
 
-
 app.use('/', homeRoutes);
 app.use('/', authRoutes);
 app.use('/', dashboardRoutes);
+app.use('/', blogpostRoutes);
 
 // Sync database and start server
 sequelize.sync({ force: false }).then(() => {
