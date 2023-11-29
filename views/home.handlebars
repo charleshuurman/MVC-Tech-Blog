@@ -5,10 +5,17 @@
   {{#each posts as |post|}}
     <div>
       <h2>{{post.title}}</h2>
-      <p>{{post.content}}</p> 
-      <!-- more post details as needed -->
+      <p>{{post.content}}</p>
+      {{#if post.imageUrl}}
+        <img src="{{post.imageUrl}}" alt="Post Image" style="max-width: 100%;">
+      {{/if}}
+      {{#if post.url}}
+        <p>Read more at: <a href="{{post.url}}" target="_blank">{{post.url}}</a></p>
+      {{/if}}
+      <!-- Add buttons or links for additional actions -->
     </div>
   {{/each}}
 </div>
 
-{{> footer}} 
+{{> footer}}
+
