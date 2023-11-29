@@ -39,17 +39,17 @@ module.exports = (sequelize, DataTypes) => {
     });
   
     Post.associate = function(models) {
-      Post.belongsTo(models.User, {
-        foreignKey: 'userId',
-        as: 'author',
-        onDelete: 'CASCADE',
-      });
-  
-      Post.hasMany(models.Comment, {
-        foreignKey: 'postId',
-        as: 'comments',
-        onDelete: 'CASCADE',
-      });
+        Post.belongsTo(models.User, {
+            foreignKey: 'userId',
+            as: 'author',
+            onDelete: 'CASCADE',
+        });
+
+        Post.hasMany(models.Comment, {
+            foreignKey: 'postId',
+            as: 'comments',
+            onDelete: 'CASCADE',
+        });
     };
   
     return Post;
