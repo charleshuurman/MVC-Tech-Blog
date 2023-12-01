@@ -15,6 +15,8 @@ const moment = require('moment'); // Import moment
 
 const app = express();
 
+app.use(express.static('public'));
+
 // Set up Handlebars with allowInsecurePrototypeAccess
 const hbs = expressHandlebars.create({
     defaultLayout: 'main',
@@ -51,7 +53,7 @@ app.use(session({
 
 app.use('/', homeRoutes);
 app.use('/', authRoutes);
-app.use('/', dashboardRoutes);
+app.use('/', dashboardRoutes); 
 app.use('/', blogpostRoutes);
 app.use('/', commentRoutes);
 
