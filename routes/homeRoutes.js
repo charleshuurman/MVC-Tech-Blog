@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { Post } = require('../models'); // Import Post model
+const { Post } = require('../models');
 
 router.get('/', async (req, res) => {
   try {
-    const postData = await Post.findAll(); // Fetch posts from the database
+    const postData = await Post.findAll();
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render('home', { posts }); // Render home.handlebars with posts data
+    res.render('home', { posts, headerTitle: 'The Tech Blog' }); 
   } catch (err) {
     res.status(500).send(err.message);
   }

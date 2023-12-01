@@ -1,4 +1,9 @@
 <h1>All Posts</h1>
+{{> header }}
+{{!-- {{#if loggedIn}}
+    <a href="/posts/new">New Post</a>
+{{/if}} --}}
+
 {{#each posts}}
     <div>
         <h2>{{this.title}}</h2>
