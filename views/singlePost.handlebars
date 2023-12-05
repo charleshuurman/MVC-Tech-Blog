@@ -1,0 +1,57 @@
+{{!-- views/singlePost.handlebars --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{headerTitle}}</title>
+    <link rel="stylesheet" href="/css/homeStyles.css">
+</head>
+<body>
+  {{> header }}
+  <main class="main-content">
+    <div class="post">
+      <!-- Post content -->
+      <div class="post-header">
+        <h2 class="post-title">{{post.title}}</h2>
+        <p class="post-meta">Posted on {{formatDate post.createdAt}}</p>
+      </div>
+      <div class="post-body">
+        {{#if post.imageUrl}}
+          <img src="{{post.imageUrl}}" alt="Post Image" class="post-image">
+        {{/if}}
+        <p class="post-content">{{post.content}}</p>
+        {{#if post.url}}
+          <p class="post-url">Read more at: <a href="{{post.url}}" target="_blank">{{post.url}}</a></p>
+        {{/if}}
+      </div>
+          <!-- Buttons for editing and deleting posts -->
+          <div class="post-actions">
+            <a href="/posts/edit/{{post.id}}" class="edit-btn">Edit</a>
+            <form action="/posts/delete/{{post.id}}" method="POST" style="display: inline;">
+              <button type="submit" class="delete-btn">Delete</button>
+            </form>
+          </div>
+      <!-- Comments section -->
+      <h3>Comments:</h3>
+      {{#if post.comments}}
+        {{#each post.comments}}
+          <div class="comment">
+            <p>{{this.content}} - Posted by {{this.user.username}} on {{formatDate this.createdAt}}</p>
+          </div>
+        {{/each}}
+      {{else}}
+        <p>No comments yet.</p>
+      {{/if}}
+
+      <!-- Comment form -->
+      <form action="/comments" method="POST">
+        <input type="hidden" name="postId" value="{{post.id}}">
+        <textarea name="content" placeholder="Add a comment..." required></textarea>
+        <button type="submit">Post Comment</button>
+      </form>
+    </div>
+  </main>
+  {{> footer }}
+</body>
+</html>
