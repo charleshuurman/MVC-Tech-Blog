@@ -1,6 +1,6 @@
 const express = require('express');
 const ensureAuthenticated = require('../middleware/authMiddleware');
-const { Post } = require('../models');
+const { Post, User } = require('../models'); // Import Post and User models
 const router = express.Router();
 
 router.get('/dashboard', async (req, res) => {
@@ -9,7 +9,13 @@ router.get('/dashboard', async (req, res) => {
         const userPosts = await Post.findAll({ where: { userId: userId } });
         const posts = userPosts.map(post => post.get({ plain: true }));
 
-        res.render('dashboard', { posts, headerTitle: 'Your Dashboard' }); // Added headerTitle here
+        res.render('dashboard', { 
+            loggedIn: req.session.userId ? true : false,
+            posts, 
+            headerTitle: 'Your Dashboard' 
+        }); 
+
+
     } catch (error) {
         console.error('Error fetching dashboard data:', error);
         res.status(500).send('Error loading dashboard');

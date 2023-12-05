@@ -1,35 +1,53 @@
 {{!-- views/dashboard.handlebars --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="/css/homeStyles.css">
+</head>
+
 {{> header }}
 
-<h1>Dashboard</h1>
+<main class="main-content">
+  {{#if posts.length}}
+    <div class="posts-container">
+      {{#each posts}}
+        <div class="post">
+          <!-- Top section for title and metadata -->
+          <div class="post-header">
+            <h2 class="post-title">{{this.title}}</h2>
+            <p class="post-meta">Posted on {{formatDate this.createdAt}}</p>
+          </div>
 
-{{#if posts.length}}
-  <div>
-    {{#each posts}}
-      <div>
-        <h3>{{this.title}}</h3>
-        <p>{{this.content}}</p>
-        <!-- Display image if imageUrl is present -->
+          <!-- Bottom section for content, image, and URL -->
+          <div class="post-body">
+            {{#if this.imageUrl}}
+              <img src="{{this.imageUrl}}" alt="Post Image" class="post-image">
+            {{/if}}
+            <p class="post-content">{{this.content}}</p>
+            {{#if this.url}}
+              <p class="post-url">Read more at: <a href="{{this.url}}" target="_blank">{{this.url}}</a></p>
+            {{/if}}
+          </div>
 
-        {{#if this.imageUrl}}
-          <img src="{{this.imageUrl}}" alt="Post Image">
-        {{/if}}
-        {{#if this.url}}
-          <a href="{{this.url}}">Link to More Info</a>
-        {{/if}}
+          <!-- Buttons for editing and deleting posts -->
+          <div class="post-actions">
+            <a href="/posts/{{this.id}}" class="edit-btn">View Post</a>
+            <a href="/posts/edit/{{this.id}}" class="edit-btn">Edit</a>
+            <form action="/posts/delete/{{this.id}}" method="POST" style="display: inline;">
+              <button type="submit" class="delete-btn">Delete</button>
+            </form>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <p>You have no posts yet. Start by creating one!</p>
+  {{/if}}
 
-        <!-- Buttons or links for editing and deleting posts -->
-        <a href="/posts/edit/{{this.id}}">Edit</a> |
-        <form action="/posts/delete/{{this.id}}" method="POST" style="display: inline;">
-          <button type="submit">Delete</button>
-        </form>
-      </div>
-    {{/each}}
-  </div>
-{{else}}
-  <p>You have no posts yet. Start by creating one!</p>
-{{/if}}
-
-<a href="/posts/new">Create New Post</a>
+  <a href="/posts/new" class="create-post-btn">Create New Post</a>
+</main>
 
 {{> footer }}

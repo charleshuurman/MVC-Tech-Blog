@@ -1,0 +1,112 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: aquamarine; /* whole page */
+  }
+  
+  .main-content {
+    width: calc(100% - 200px); /* Adjust width to account for 100px margin on each side */
+    margin: 0 auto; /* Center the content */
+    padding: 20px;
+  }
+  
+  .posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+  }
+  
+  .post {
+    border: 5px solid black; /* Black edges for each post */
+    border-radius: 5px;
+    overflow: hidden; /* Ensures the child elements' border-radius is respected */
+    margin-top: 10px;
+    margin-bottom: 10px; 
+  }
+  
+  .post-header {
+    background-color: black;
+    color: white;
+    padding: 20px;
+  }
+  
+  .post-title {
+    font-size: 1.8em;
+    margin: 0;
+    white-space: nowrap; /* Prevents the title from wrapping */
+    text-overflow: ellipsis; /* Adds an ellipsis if the title is too long */
+  }
+  
+  .post-meta {
+    font-size: 1em;
+    margin-top: 0px;
+    text-align: right;
+ 
+  }
+  
+  .post-body {
+    background-color: transparent;
+    padding: 15px;
+  }
+  
+  .post-content {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .post-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .post-url {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+
+  /* Button Styles */
+  
+.edit-btn, .delete-btn, .create-post-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.edit-btn:hover, .create-post-btn:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.delete-btn:hover {
+  background-color: red;
+  color: white;
+}
+
+/* Adjust the margin and padding as needed to fit your design */
+.post-actions {
+  padding: 10px;
+  text-align: right;
+}
+
+/* If you want to align the 'Create New Post' button differently */
+.create-post-btn {
+  display: block; /* Makes the button take the full width of its container */
+  width: max-content; /* Adjusts the width to fit the content */
+  margin: 20px auto; /* Centers the button */
+}
+
+  
+  
+  

@@ -1,5 +1,5 @@
 const express = require('express');
-const { Post, Comment } = require('../models'); // Import Post and Comment models
+const { Post, Comment, User } = require('../models');
 const router = express.Router();
 
 // Route to display all posts with their comments
@@ -33,19 +33,25 @@ router.post('/posts', async (req, res) => {
     }
 });
 
-// Route to display a single post
+// Route to seeng a single post
 router.get('/posts/:id', async (req, res) => {
     try {
         const post = await Post.findByPk(req.params.id, {
-            include: [{ model: Comment, as: 'comments' }] // Use the alias here
+            include: [{ model: Comment, as: 'comments', include: [{ model: User, as: 'user' }] }]
         });
-        const plainPost = post.get({ plain: true });
-        res.render('blogpost', { post: plainPost });
+        if (post) {
+            res.render('singlePost', { post: post.get({ plain: true }), 
+            headerTitle: 'Single Post' 
+        });
+        } else {
+            res.status(404).send('Post not found');
+        }
     } catch (error) {
         console.error('Error fetching post:', error);
         res.status(500).send('Error loading post');
     }
 });
+
 
 
 // Route to display the form for editing a post
@@ -72,10 +78,11 @@ router.post('/posts/update/:id', async (req, res) => {
 });
 
 // Route to handle deleting a post
-router.delete('/posts/:id', async (req, res) => {
+router.post('/posts/delete/:id', async (req, res) => {
     try {
-        await Post.destroy({ where: { id: req.params.id } });
-        res.redirect('/posts');
+        const postId = req.params.id;
+        await Post.destroy({ where: { id: postId } });
+        res.redirect('/dashboard'); // Redirect to the dashboard after deletion
     } catch (error) {
         console.error('Error deleting post:', error);
         res.status(500).send('Error deleting post');
