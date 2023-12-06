@@ -1,13 +1,14 @@
+// commentRoutes.js
 const express = require('express');
 const { Comment, Post } = require('../models');
 const router = express.Router();
 
 router.post('/comments', async (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'You must be logged in to comment' });
+    }
     try {
-        const { postId, content } = req.body; 
-        if (!req.session.userId) {
-            return res.status(401).send('You must be logged in to comment');
-        }
+        const { postId, content } = req.body;
 
         if (!postId) {
             return res.status(400).send('Post ID is required');
@@ -19,12 +20,16 @@ router.post('/comments', async (req, res) => {
             userId: req.session.userId
         });
 
-        res.redirect(`/posts/${postId}`);
+        // Redirect back to the posts page
+        res.redirect('/posts');
+        
     } catch (error) {
         console.error('Error creating comment:', error);
         res.status(500).send('Error posting comment');
     }
 });
+
+
 
 
 //DELETE Route to Remove a Comment:

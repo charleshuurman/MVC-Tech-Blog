@@ -2,18 +2,31 @@ const express = require('express');
 const { Post, Comment, User } = require('../models');
 const router = express.Router();
 
-// Route to display all posts with their comments
+// Route to display all posts with their comments and the users who commented
 router.get('/posts', async (req, res) => {
+    
     try {
         const posts = await Post.findAll({
-            include: [{ model: Comment, as: 'comments' }] // Use the alias here
+            include: [
+                { 
+                    model: Comment, 
+                    as: 'comments',
+                    include: [{ model: User, as: 'user' }] 
+                }
+            ]
         });
-        res.render('blogPost', { posts });
+        res.render('blogPost', { 
+            posts, 
+            headerTitle: 'All Posts',
+            loggedIn: req.session.userId ? true : false 
+        });
     } catch (error) {
         console.error('Error fetching posts:', error);
         res.status(500).send('Error loading posts');
     }
 });
+
+
 
 
 // Route to display the form for creating a new post
@@ -36,21 +49,35 @@ router.post('/posts', async (req, res) => {
 // Route to seeng a single post
 router.get('/posts/:id', async (req, res) => {
     try {
-        const post = await Post.findByPk(req.params.id, {
-            include: [{ model: Comment, as: 'comments', include: [{ model: User, as: 'user' }] }]
+        const postId = req.params.id;
+        const post = await Post.findByPk(postId, {
+            include: [
+                { 
+                    model: Comment, 
+                    as: 'comments', 
+                    include: [{ model: User, as: 'user' }] 
+                },
+                {
+                    model: User,
+                    as: 'author'
+                }
+            ]
         });
-        if (post) {
-            res.render('singlePost', { post: post.get({ plain: true }), 
-            headerTitle: 'Single Post' 
-        });
-        } else {
+  
+        if (!post) {
             res.status(404).send('Post not found');
+        } else {
+            res.render('singlePost', { 
+                post: post.get({ plain: true }), 
+                headerTitle: 'Single Post',
+                loggedIn: req.session.userId ? true : false 
+            });
         }
     } catch (error) {
         console.error('Error fetching post:', error);
         res.status(500).send('Error loading post');
     }
-});
+  });
 
 
 

@@ -1,4 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="/css/homeStyles.css">
+
+
+</head>
+{{> header}}
+
+<main class="main-content">
+  <div class="posts-container">
+
 <h1>Create New Post</h1>
+
+<div class="post-header">
 <form action="/posts" method="POST">
     <div>
         <label for="title">Title:</label>
@@ -16,5 +33,7 @@
         <label for="url">External URL:</label>
         <input type="text" id="url" name="url">
     </div>
-    <button type="submit">Create Post</button>
+     </div>
+
+    <button type="submit" class="edit-btn">Create Post</button>
 </form>
