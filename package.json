@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "postinstall": "npm rebuild bcrypt --build-from-source",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -28,6 +29,6 @@
     "sequelize-cli": "^6.6.2"
   },
   "engines": {
-    "node": "16.x"
+    "node": "18.x"
   }
 }
