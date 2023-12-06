@@ -5,7 +5,10 @@ const { User } = require('../models');
 
 // Sign Up Route
 router.get('/signup', (req, res) => {
-    res.render('signup'); // Render the sign-up form
+    res.render('signup', {
+        oggedIn: req.session.userId ? true : false,
+        headerTitle: 'Create your new account',
+    }); // Render the sign-up form
 });
 
 router.post('/signup', async (req, res) => {
@@ -24,7 +27,10 @@ router.post('/signup', async (req, res) => {
 
 // Log In Route
 router.get('/login', (req, res) => {
-    res.render('login'); // Render the login form
+    res.render('login', {
+        loggedIn: req.session.userId ? true : false,
+        headerTitle: 'Log in to your account',
+    }); // Render the login form
 });
 
 router.post('/login', async (req, res) => {

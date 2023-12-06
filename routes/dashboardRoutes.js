@@ -18,7 +18,7 @@ router.get('/dashboard', async (req, res) => {
 
     } catch (error) {
         console.error('Error fetching dashboard data:', error);
-        res.status(500).send('Error loading dashboard');
+        res.status(500).send('You need to log in first');
     }
 });
 

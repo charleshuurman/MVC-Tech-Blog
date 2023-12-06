@@ -1,9 +1,23 @@
 {{!-- signup.handlebars --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="/css/homeStyles.css">
+
+
+</head>
 
 {{> header }} 
 
-<h1>Sign Up</h1>
+<main class="main-content">
+  <div class="posts-container">
 
+<h1>Welcome to the Tech Team!</h1>
+
+<div class="post-header">
 <form action="/signup" method="POST">
     <div>
         <label for="username">Username:</label>
@@ -17,9 +31,13 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
     </div>
-    <button type="submit">Sign Up</button>
+    </div>
+    <button type="submit" class="edit-btn">Sign Up</button>
 </form>
 
 <p>Already a user? <a href="/login">Log gn up here</a></p>
+</div>
 
+  
+</main>
 {{> footer }} 

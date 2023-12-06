@@ -1,51 +1,77 @@
-<h1>All Posts</h1>
+{{!-- views/blogpost.handlebars --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{headerTitle}}</title>
+    <link rel="stylesheet" href="/css/homeStyles.css">
+</head>
+
 {{> header }}
-{{!-- {{#if loggedIn}}
-    <a href="/posts/new">New Post</a>
-{{/if}} --}}
 
-{{#each posts}}
-    <div>
-        <h2>{{this.title}}</h2>
-        <p>{{this.content}}</p>
-        <!-- Display image if imageUrl is present -->
-        {{#if this.imageUrl}}
-            <img src="{{this.imageUrl}}" alt="Post Image">
-        {{/if}}
-        <!-- Display link if url is present -->
-        {{#if this.url}}
-            <a href="{{this.url}}">Link to More Info</a>
-        {{/if}}
+<main class="main-content">
+  {{#if posts.length}}
+    <div class="posts-container">
+      {{#each posts}}
+        <div class="post">
+          <!-- Top section for title and metadata -->
+          <div class="post-header">
+            <h2 class="post-title">{{this.title}}</h2>
+            <p class="post-meta">Posted on {{formatDate this.createdAt}}</p>
+          </div>
 
-        <!-- Display post creation and update times -->
-        <p>Posted on: {{formatDate this.createdAt}}</p>
-        {{#if this.updatedAt}}
-            <p>Last updated: {{formatDate this.updatedAt}}</p>
-        {{/if}}
+          <!-- Bottom section for content, image, and URL -->
+          <div class="post-body">
+            {{#if this.imageUrl}}
+              <img src="{{this.imageUrl}}" alt="Post Image" class="post-image">
+            {{/if}}
+            <p class="post-content">{{this.content}}</p>
+            {{#if this.url}}
+              <p class="post-url">Read more at: <a href="{{this.url}}" target="_blank">{{this.url}}</a></p>
+            {{/if}}
+          </div>
 
-        <!-- Links to view, edit, delete the post -->
-        <a href="/posts/{{this.id}}">View Post</a> | 
-
-
-        <!-- Display comments for this post -->
-        <h3>Comments:</h3>
-        {{#if this.comments}}
+          <!-- Comments section -->
+          <h3>Comments:</h3>
+          {{#if this.comments}}
             {{#each this.comments}}
-                <div>
-                    <p>{{this.content}}</p>
-                    <!-- Add a delete button for each comment if the user owns the comment -->
-                    {{!-- Implement userOwnsComment logic here if needed --}}
-                </div>
+              <div class="comment">
+                <p>{{this.content}} - Posted by {{this.user.username}} on {{formatDate this.createdAt}}</p>
+              </div>
             {{/each}}
-        {{else}}
+          {{else}}
             <p>No comments yet.</p>
-        {{/if}}
+          {{/if}}
 
-        <!-- Form to add a new comment -->
-        <form action="/comments" method="POST">
-            <input type="hidden" name="postId" value="{{this.id}}">
-            <textarea name="content" placeholder="Add a comment..." required></textarea>
-            <button type="submit">Post Comment</button>
-        </form>
+          <!-- Comment form -->
+<div id="loginModal" class="modal" style="display: none;">
+    <p>You must be logged in to comment.</p>
+    <button onclick="closeModal()">Close</button>
+</div>
+
+      <form action="/comments" method="POST" onsubmit="return checkLoginBeforeSubmit(this);">
+    <input type="hidden" name="postId" value="{{this.id}}">
+    <textarea name="content" placeholder="Add a comment..." required></textarea>
+    <button type="submit" class="edit-btn">Post Comment</button>
+</form>
+
+          <!-- View Post button -->
+          <div class="post-actions">
+            <a href="/posts/{{this.id}}" class="edit-btn">Comment or View Post</a>
+          </div>
+        </div>
+      {{/each}}
     </div>
-{{/each}}
+  {{else}}
+    <p>No posts available.</p>
+  {{/if}}
+</main>
+
+{{> footer }}
+
+<script>
+    window.isLoggedIn = {{loggedIn}};
+</script>
+<script src="/comment.js"></script>
+

@@ -1,7 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="/css/homeStyles.css">
+
+
+</head>
+
 {{> header}}
 
-<h1>Login</h1>
+<main class="main-content">
+  <div class="posts-container">
 
+<h1>Hello again!</h1>
+
+<div class="post-header">
 <form action="/login" method="POST">
     <div>
         <label for="email">Email:</label>
@@ -11,9 +26,15 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
     </div>
-    <button type="submit">Login</button>
+    </div>
+    <button type="submit"  class="edit-btn">Login</button>
 </form>
+
 
 <p>New user? <a href="/signup">Sign up here</a></p>
 
+ </div>
+
+  
+</main>
 {{> footer}}
