@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.5",
-    "bcrypt": "^5.1.1",
+    "bcrypt": "5.0.0",
     "connect-session-sequelize": "^7.1.7",
     "dotenv": "^16.3.1",
     "express": "^4.18.1",
@@ -23,7 +23,11 @@
     "mysql2": "^3.6.5",
     "sequelize": "^6.35.1"
   },
+  
   "devDependencies": {
     "sequelize-cli": "^6.6.2"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
