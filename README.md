@@ -45,7 +45,7 @@ Video DEMO:
 
 For a visual guide:
 
-<img src="/public/Screenshot.png" alt="Home Page" height="300">
+<img src="/public/Screenshot2.png" alt="Home Page" height="300">
 
 ## Features
 
