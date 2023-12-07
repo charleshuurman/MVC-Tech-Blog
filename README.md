@@ -36,7 +36,16 @@ The project aims to create a platform for developers to share and discuss tech-r
 
 ## Usage
 
+This is the HEROKU link to use the deployed app: [HEROKU](https://techblogch-9f3ef9103546.herokuapp.com/) 
+
 Upon launching the application, users are greeted with a homepage displaying existing blog posts. Users can sign up or log in to access additional features such as creating, editing, or deleting posts, and commenting on posts.
+
+Video DEMO:
+[VIDEO_DEMO](https://youtu.be/P6-8TtZ8Yrs) 
+
+For a visual guide:
+
+<img src="/public/Screenshot.png" alt="Home Page" height="300">
 
 ## Features
 
@@ -58,7 +67,7 @@ For more detailed instructions, refer to the [Contributor Covenant](https://www.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for details.
 
 ## Tests
 
@@ -68,4 +77,4 @@ To run tests, use the command `npm test`. Ensure that all tests pass to maintain
 
 ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
 
-Badges demonstrate credibility and skill level. Check out [shields.io](https://shields.io/) for more badges.
+
